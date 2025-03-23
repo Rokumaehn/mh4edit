@@ -24,9 +24,5 @@
     <Folder Include="images\" />
     <Resource Include="images/app.ico" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="System.Drawing.Common" Version="9.0.2" />
-  </ItemGroup>
 
 </Project>

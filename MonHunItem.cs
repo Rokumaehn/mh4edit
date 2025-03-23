@@ -44,11 +44,6 @@ namespace mh4edit
             }
         }
 
-        public virtual System.Drawing.Bitmap GetIcon()
-        {
-            return null;
-        } 
-
         public MonHunItem(ushort id, ushort count)
         {
             _id = id;
