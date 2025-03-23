@@ -10,9 +10,6 @@ namespace mh4edit
         byte _kinsectLevel;
         byte _elementValue;
         byte _elementType;
-        ushort _slot0;
-        ushort _slot1;
-        ushort _slot2;
         byte _sharpness;
         byte _modifier;
         byte _upgrade;
@@ -303,9 +300,6 @@ namespace mh4edit
             _kinsectLevel = equip[1];
             _elementValue = equip[4];
             _elementType = equip[5];
-            _slot0 = BitConverter.ToUInt16(equip, 6);
-            _slot1 = BitConverter.ToUInt16(equip, 8);
-            _slot2 = BitConverter.ToUInt16(equip, 0xA);
             _sharpness = equip[0xC];
             _modifier = equip[0xD];
             _upgrade = equip[0xE];
@@ -326,9 +320,6 @@ namespace mh4edit
             _kinsectLevel = 0;
             _elementValue = 0;
             _elementType = 0;
-            _slot0 = 0;
-            _slot1 = 0;
-            _slot2 = 0;
             _sharpness = 0;
             _modifier = 0;
             _upgrade = 0;
@@ -348,9 +339,6 @@ namespace mh4edit
             ret[1] = _kinsectLevel;
             ret[4] = _elementValue;
             ret[5] = _elementType;
-            Array.Copy(BitConverter.GetBytes(_slot0), 0, ret, 6, 2);
-            Array.Copy(BitConverter.GetBytes(_slot1), 0, ret, 8, 2);
-            Array.Copy(BitConverter.GetBytes(_slot2), 0, ret, 0xA, 2);
             ret[0xC] = _sharpness;
             ret[0xD] = _modifier;
             ret[0xE] = _upgrade;
