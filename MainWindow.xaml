@@ -1,0 +1,474 @@
+﻿<Window x:Class="mh4edit.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:mh4edit"
+        mc:Ignorable="d"
+        Title="MH4UEdit" Height="520" Width="740" MinWidth="740" MinHeight="600" Icon="/images/app.ico">
+    
+    <Window.Resources>
+        
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Height="64" Orientation="Horizontal" >
+            <Button Margin="10,0,0,0" Content="Load" Width="64" Height="24" Click="Button_OpenFileClick"/>
+            <Button Margin="10,0,0,0" Content="Save" Width="64" Height="24" Click="Button_SaveFileClick"/>
+            <StackPanel Margin="10,0,0,0" Orientation="Vertical" >
+                <Label>Name</Label>
+                <TextBox Width="201" Text="{Binding Name}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" >
+                <Label>HR</Label>
+                <TextBox Width="58" Text="{Binding HunterRank}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label>HR Points</Label>
+                <TextBox Width="127" Text="{Binding HunterRankPoints}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" >
+                <Label>Funds</Label>
+                <TextBox Width="127" Text="{Binding Funds}"/>
+            </StackPanel>
+        </StackPanel>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Item Box">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button Margin="5,5,5,5" Padding="5,5,5,5" Content="Set all 99" Click="Button_SetItemBox99"/>
+                        <Button Margin="5,5,5,5" Padding="5,5,5,5" Content="Remove dupes" Click="Button_RemoveItemBoxDupes"/>
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding ItemBox}" AutoGenerateColumns="False" Margin="10">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Item">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox
+                                        ItemsSource="{Binding Path=DataContext.AllItems, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                        DisplayMemberPath="Name"
+                                        SelectedValue="{Binding ID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedValuePath="ID"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Count" Binding="{Binding Count, Mode=TwoWay}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Equipment Box">
+                <Grid Margin="5,5,5,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="320"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical">
+                    <Grid Margin="5,5,5,5" Width="320">
+                        <Button Margin="48,0,0,0" HorizontalAlignment="Left" Content="&lt;" Width="32" Height="32" Click="Button_EquipBoxLeftClick"/>
+                        <Label HorizontalAlignment="Center" x:Name="LabelEquipBoxPage" Content="1 / 14"/>
+                        <Button Margin="0,0,48,0" HorizontalAlignment="Right" Content="&gt;" Width="32" Height="32" Click="Button_EquipBoxRightClick"/>
+                    </Grid>
+                    <Grid x:Name="ButtonGrid" Grid.Column="0">
+                        <!-- Define 10 rows and 10 columns -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="32"/>
+                            <RowDefinition Height="32"/>
+                            <RowDefinition Height="32"/>
+                            <RowDefinition Height="32"/>
+                            <RowDefinition Height="32"/>
+                            <RowDefinition Height="32"/>
+                            <RowDefinition Height="32"/>
+                            <RowDefinition Height="32"/>
+                            <RowDefinition Height="32"/>
+                            <RowDefinition Height="32"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition Width="32"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Create 100 buttons -->
+                        <Button Grid.Row="0" Grid.Column="0" Width="32" Height="32" Tag="0" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="0" Grid.Column="1" Width="32" Height="32" Tag="1" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="0" Grid.Column="2" Width="32" Height="32" Tag="2" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="0" Grid.Column="3" Width="32" Height="32" Tag="3" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="0" Grid.Column="4" Width="32" Height="32" Tag="4" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="0" Grid.Column="5" Width="32" Height="32" Tag="5" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="0" Grid.Column="6" Width="32" Height="32" Tag="6" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="0" Grid.Column="7" Width="32" Height="32" Tag="7" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="0" Grid.Column="8" Width="32" Height="32" Tag="8" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="0" Grid.Column="9" Width="32" Height="32" Tag="9" Click="Button_Click"><Image /></Button>
+                        <!-- ... -->
+                        <Button Grid.Row="1" Grid.Column="0" Width="32" Height="32" Tag="10" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="1" Grid.Column="1" Width="32" Height="32" Tag="11" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="1" Grid.Column="2" Width="32" Height="32" Tag="12" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="1" Grid.Column="3" Width="32" Height="32" Tag="13" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="1" Grid.Column="4" Width="32" Height="32" Tag="14" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="1" Grid.Column="5" Width="32" Height="32" Tag="15" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="1" Grid.Column="6" Width="32" Height="32" Tag="16" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="1" Grid.Column="7" Width="32" Height="32" Tag="17" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="1" Grid.Column="8" Width="32" Height="32" Tag="18" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="1" Grid.Column="9" Width="32" Height="32" Tag="19" Click="Button_Click"><Image /></Button>
+                        <!-- ... -->
+                        <Button Grid.Row="2" Grid.Column="0" Width="32" Height="32" Tag="20" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="2" Grid.Column="1" Width="32" Height="32" Tag="21" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="2" Grid.Column="2" Width="32" Height="32" Tag="22" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="2" Grid.Column="3" Width="32" Height="32" Tag="23" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="2" Grid.Column="4" Width="32" Height="32" Tag="24" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="2" Grid.Column="5" Width="32" Height="32" Tag="25" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="2" Grid.Column="6" Width="32" Height="32" Tag="26" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="2" Grid.Column="7" Width="32" Height="32" Tag="27" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="2" Grid.Column="8" Width="32" Height="32" Tag="28" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="2" Grid.Column="9" Width="32" Height="32" Tag="29" Click="Button_Click"><Image /></Button>
+                        <!-- ... -->
+                        <Button Grid.Row="3" Grid.Column="0" Width="32" Height="32" Tag="30" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="3" Grid.Column="1" Width="32" Height="32" Tag="31" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="3" Grid.Column="2" Width="32" Height="32" Tag="32" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="3" Grid.Column="3" Width="32" Height="32" Tag="33" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="3" Grid.Column="4" Width="32" Height="32" Tag="34" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="3" Grid.Column="5" Width="32" Height="32" Tag="35" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="3" Grid.Column="6" Width="32" Height="32" Tag="36" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="3" Grid.Column="7" Width="32" Height="32" Tag="37" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="3" Grid.Column="8" Width="32" Height="32" Tag="38" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="3" Grid.Column="9" Width="32" Height="32" Tag="39" Click="Button_Click"><Image /></Button>
+                        <!-- ... -->
+                        <Button Grid.Row="4" Grid.Column="0" Width="32" Height="32" Tag="40" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="4" Grid.Column="1" Width="32" Height="32" Tag="41" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="4" Grid.Column="2" Width="32" Height="32" Tag="42" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="4" Grid.Column="3" Width="32" Height="32" Tag="43" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="4" Grid.Column="4" Width="32" Height="32" Tag="44" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="4" Grid.Column="5" Width="32" Height="32" Tag="45" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="4" Grid.Column="6" Width="32" Height="32" Tag="46" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="4" Grid.Column="7" Width="32" Height="32" Tag="47" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="4" Grid.Column="8" Width="32" Height="32" Tag="48" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="4" Grid.Column="9" Width="32" Height="32" Tag="49" Click="Button_Click"><Image /></Button>
+                        <!-- ... -->
+                        <Button Grid.Row="5" Grid.Column="0" Width="32" Height="32" Tag="50" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="5" Grid.Column="1" Width="32" Height="32" Tag="51" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="5" Grid.Column="2" Width="32" Height="32" Tag="52" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="5" Grid.Column="3" Width="32" Height="32" Tag="53" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="5" Grid.Column="4" Width="32" Height="32" Tag="54" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="5" Grid.Column="5" Width="32" Height="32" Tag="55" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="5" Grid.Column="6" Width="32" Height="32" Tag="56" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="5" Grid.Column="7" Width="32" Height="32" Tag="57" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="5" Grid.Column="8" Width="32" Height="32" Tag="58" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="5" Grid.Column="9" Width="32" Height="32" Tag="59" Click="Button_Click"><Image /></Button>
+                        <!-- ... -->
+                        <Button Grid.Row="6" Grid.Column="0" Width="32" Height="32" Tag="60" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="6" Grid.Column="1" Width="32" Height="32" Tag="61" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="6" Grid.Column="2" Width="32" Height="32" Tag="62" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="6" Grid.Column="3" Width="32" Height="32" Tag="63" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="6" Grid.Column="4" Width="32" Height="32" Tag="64" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="6" Grid.Column="5" Width="32" Height="32" Tag="65" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="6" Grid.Column="6" Width="32" Height="32" Tag="66" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="6" Grid.Column="7" Width="32" Height="32" Tag="67" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="6" Grid.Column="8" Width="32" Height="32" Tag="68" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="6" Grid.Column="9" Width="32" Height="32" Tag="69" Click="Button_Click"><Image /></Button>
+                        <!-- ... -->
+                        <Button Grid.Row="7" Grid.Column="0" Width="32" Height="32" Tag="70" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="7" Grid.Column="1" Width="32" Height="32" Tag="71" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="7" Grid.Column="2" Width="32" Height="32" Tag="72" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="7" Grid.Column="3" Width="32" Height="32" Tag="73" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="7" Grid.Column="4" Width="32" Height="32" Tag="74" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="7" Grid.Column="5" Width="32" Height="32" Tag="75" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="7" Grid.Column="6" Width="32" Height="32" Tag="76" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="7" Grid.Column="7" Width="32" Height="32" Tag="77" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="7" Grid.Column="8" Width="32" Height="32" Tag="78" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="7" Grid.Column="9" Width="32" Height="32" Tag="79" Click="Button_Click"><Image /></Button>
+                        <!-- ... -->
+                        <Button Grid.Row="8" Grid.Column="0" Width="32" Height="32" Tag="80" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="8" Grid.Column="1" Width="32" Height="32" Tag="81" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="8" Grid.Column="2" Width="32" Height="32" Tag="82" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="8" Grid.Column="3" Width="32" Height="32" Tag="83" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="8" Grid.Column="4" Width="32" Height="32" Tag="84" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="8" Grid.Column="5" Width="32" Height="32" Tag="85" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="8" Grid.Column="6" Width="32" Height="32" Tag="86" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="8" Grid.Column="7" Width="32" Height="32" Tag="87" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="8" Grid.Column="8" Width="32" Height="32" Tag="88" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="8" Grid.Column="9" Width="32" Height="32" Tag="89" Click="Button_Click"><Image /></Button>
+                        <!-- ... -->
+                        <Button Grid.Row="9" Grid.Column="0" Width="32" Height="32" Tag="90" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="9" Grid.Column="1" Width="32" Height="32" Tag="91" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="9" Grid.Column="2" Width="32" Height="32" Tag="92" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="9" Grid.Column="3" Width="32" Height="32" Tag="93" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="9" Grid.Column="4" Width="32" Height="32" Tag="94" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="9" Grid.Column="5" Width="32" Height="32" Tag="95" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="9" Grid.Column="6" Width="32" Height="32" Tag="96" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="9" Grid.Column="7" Width="32" Height="32" Tag="97" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="9" Grid.Column="8" Width="32" Height="32" Tag="98" Click="Button_Click"><Image /></Button>
+                        <Button Grid.Row="9" Grid.Column="9" Width="32" Height="32" Tag="99" Click="Button_Click"><Image /></Button>
+                    </Grid>
+                    </StackPanel>
+
+                    <Grid x:Name="EquipmentDetailsGrid" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label x:Name="LabelEqpType" Grid.Row="0" Grid.Column="0" Content="Type"/>
+                        <ComboBox x:Name="ComboEquipType"      Grid.Row="0" Grid.Column="1"
+                                        ItemsSource="{Binding Path=DataContext.AllEquipTypes, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                        DisplayMemberPath="TypeString"
+                                        SelectedValue="{Binding EquipBox[0], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedValuePath="Type"
+                                        SelectionChanged="ComboEquipType_SelectionChanged" />
+                        <Label x:Name="LabelEqpId" Grid.Row="1" Grid.Column="0" Content="Id"/>
+                        <ComboBox x:Name="ComboEquipId"      Grid.Row="1" Grid.Column="1"
+                                        ItemsSource="{Binding Path=DataContext.AllEquipTypes, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                        DisplayMemberPath="IDString"
+                                        SelectedValue="{Binding EquipBox[0], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedValuePath="ID" />
+                        
+                        <Label x:Name="LabelSlot1" Grid.Row="2" Grid.Column="0" Content="Slot 1" />
+                        <ComboBox x:Name="ComboSlot1"      Grid.Row="2" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Slot1" />
+                        <CheckBox x:Name="CheckSlot1Fixed"      Grid.Row="2" Grid.Column="2" Content="Fixed"/>
+                        
+                        <Label x:Name="LabelSlot2" Grid.Row="3" Grid.Column="0" Content="Slot 2" />
+                        <ComboBox x:Name="ComboSlot2"      Grid.Row="3" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Slot2" />
+                        <CheckBox x:Name="CheckSlot2Fixed"      Grid.Row="3" Grid.Column="2" Content="Fixed"/>
+                        
+                        <Label x:Name="LabelSlot3" Grid.Row="4" Grid.Column="0" Content="Slot 3" />
+                        <ComboBox x:Name="ComboSlot3"      Grid.Row="4" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Slot3" />
+                        <CheckBox x:Name="CheckSlot3Fixed"      Grid.Row="4" Grid.Column="2" Content="Fixed"/>
+                        
+                        <!-- Weapons -->
+                        <Label x:Name="LabelEqpKinsectLevel" Grid.Row="5" Grid.Column="0" Content="Kinsect Level"/>
+                        <ComboBox x:Name="ComboEquipKinsectLevel"      Grid.Row="5" Grid.Column="1"
+                                        ItemsSource="{Binding Source={x:Static local:MonHunEquipStatic.KinsectLevels}}"
+                                        DisplayMemberPath="Display"
+                                        SelectedValue="{Binding EquipBox[0], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedValuePath="KinsectLevel" />
+                        
+                        <Label x:Name="LabelEqpElementType" Grid.Row="6" Grid.Column="0" Content="Element Type"/>
+                        <ComboBox x:Name="ComboEquipElementType"      Grid.Row="6" Grid.Column="1"
+                                        ItemsSource="{Binding Source={x:Static local:MonHunEquipStatic.ElementTypes}}"
+                                        DisplayMemberPath="Display"
+                                        SelectedValue="{Binding EquipBox[0], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedValuePath="ElementType" />
+                        
+                        <Label x:Name="LabelEqpElementValue" Grid.Row="7" Grid.Column="0" Content="Element Value"/>
+                        <ComboBox x:Name="ComboEquipElementValue"      Grid.Row="7" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="ElementValue" />
+
+                        <Label x:Name="LabelEqpSharpness" Grid.Row="8" Grid.Column="0" Content="Sharpness"/>
+                        <ComboBox x:Name="ComboEquipSharpness"      Grid.Row="8" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Sharpness" />
+                        <Button x:Name="ButtonLbgCInfo" Content="Adv." Grid.Row="8" Grid.Column="2" Click="Button_LbgCInfoClick"/>
+                        <Button x:Name="ButtonHbgCInfo" Content="Adv." Grid.Row="8" Grid.Column="2" Click="Button_HbgCInfoClick"/>
+                        <Button x:Name="ButtonBowCInfo" Content="Adv." Grid.Row="8" Grid.Column="2" Click="Button_BowCInfoClick"/>
+                        
+                        <Label x:Name="LabelEqpModifier" Grid.Row="9" Grid.Column="0" Content="Modifier" />
+                        <ComboBox x:Name="ComboEquipModifier"      Grid.Row="9" Grid.Column="1" FontFamily="Lucida Console"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Modifier" />
+                        
+                        <Label x:Name="LabelEqpUpgrade" Grid.Row="10" Grid.Column="0" Content="Upgrade Level" />
+                        <ComboBox x:Name="ComboEquipUpgrade"      Grid.Row="10" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Upgrade" />
+                        
+                        <Label x:Name="LabelEqpSpecial" Grid.Row="11" Grid.Column="0" Content="Special" />
+                        <ComboBox x:Name="ComboEquipSpecial"      Grid.Row="11" Grid.Column="1" FontFamily="Lucida Console"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Special" />
+                        <Button x:Name="ButtonLbgFInfo" Content="Adv." Grid.Row="11" Grid.Column="2" Click="Button_LbgFInfoClick"/>
+                        <Button x:Name="ButtonHbgFInfo" Content="Adv." Grid.Row="11" Grid.Column="2" Click="Button_HbgFInfoClick"/>
+                        
+                        <Label x:Name="LabelEqpNumSlots" Grid.Row="12" Grid.Column="0" Content="Slot count" />
+                        <ComboBox x:Name="ComboEquipNumSlots"      Grid.Row="12" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="NumSlots" />
+                        
+                        <Label x:Name="LabelEqpPolished" Grid.Row="13" Grid.Column="0" Content="Polished" />
+                        <CheckBox x:Name="CheckEquipPolished"      Grid.Row="13" Grid.Column="1" />
+
+                        <Label x:Name="LabelEqpGlow" Grid.Row="14" Grid.Column="0" Content="Glow" />
+                        <CheckBox x:Name="CheckEquipGlow"      Grid.Row="14" Grid.Column="1" />
+
+                        <Label x:Name="LabelEqpHoning" Grid.Row="15" Grid.Column="0" Content="Honing" />
+                        <ComboBox x:Name="ComboEquipHoning"      Grid.Row="15" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Honing" />
+                        
+                        <Label x:Name="LabelEqpRarity" Grid.Row="16" Grid.Column="0" Content="Rarity" />
+                        <ComboBox x:Name="ComboEquipRarity"      Grid.Row="16" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Rarity" />
+
+                        <Label x:Name="LabelEqpPolishReq" Grid.Row="17" Grid.Column="0" Content="Polish Requirements" />
+                        <ComboBox x:Name="ComboEquipPolishReq"      Grid.Row="17" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="PolishReq" />
+                        
+                        <!-- Armors -->
+
+                        <Label x:Name="LabelArmorUpgrade" Grid.Row="5" Grid.Column="0" Content="Upgrade Level" />
+                        <ComboBox x:Name="ComboArmorUpgrade"      Grid.Row="5" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Upgrade" />
+                        
+                        <Label x:Name="LabelArmorResist" Grid.Row="6" Grid.Column="0" Content="Resistances" />
+                        <ComboBox x:Name="ComboArmorResist"      Grid.Row="6" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Resistances" />
+                        
+                        <Label x:Name="LabelArmorDefense" Grid.Row="7" Grid.Column="0" Content="Defense" />
+                        <ComboBox x:Name="ComboArmorDefense"      Grid.Row="7" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Defense" />
+                        
+                        <!-- Talismans -->
+
+                        <Label x:Name="LabelTalSkill1Id" Grid.Row="5" Grid.Column="0" Content="Skill 1" />
+                        <ComboBox x:Name="ComboTalSkill1Id"      Grid.Row="5" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Skill1Id" />
+                        
+                        <Label x:Name="LabelTalSkill1Amount" Grid.Row="6" Grid.Column="0" Content="Skill 1 Amount" />
+                        <ComboBox x:Name="ComboTalSkill1Amount"      Grid.Row="6" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Skill1Amount" />
+                        
+                        <Label x:Name="LabelTalSkill2Id" Grid.Row="7" Grid.Column="0" Content="Skill 2" />
+                        <ComboBox x:Name="ComboTalSkill2Id"      Grid.Row="7" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Skill2Id" />
+
+                        <Label x:Name="LabelTalSkill2Amount" Grid.Row="8" Grid.Column="0" Content="Skill 2 Amount" />
+                        <ComboBox x:Name="ComboTalSkill2Amount"      Grid.Row="8" Grid.Column="1"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Skill2Amount" />
+
+                    </Grid>
+                    
+                </Grid>
+            </TabItem>
+            <TabItem Header="Active GQ">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="Quest" />
+                    <ComboBox x:Name="ComboGqQuest" Grid.Row="0" Grid.Column="1"
+                        SelectionChanged="ComboGqQuest_SelectionChanged" />
+                    
+                    <Label Grid.Row="1" Grid.Column="0" Content="Owner" />
+                    <TextBox x:Name="TextboxGqOwner" Grid.Row="1" Grid.Column="1" />
+
+                    <Label Grid.Row="2" Grid.Column="0" Content="Id" />
+                    <TextBox x:Name="TextboxGqId" Grid.Row="2" Grid.Column="1" />
+
+                    <Label Grid.Row="3" Grid.Column="0" Content="Initial Level" />
+                    <TextBox x:Name="TextboxGqInitialLevel" Grid.Row="3" Grid.Column="1" />
+
+                    <Label Grid.Row="4" Grid.Column="0" Content="Current Level" />
+                    <TextBox x:Name="TextboxGqCurrentLevel" Grid.Row="4" Grid.Column="1" />
+
+                    <Label x:Name="LabelGqBiasWeapon" Grid.Row="5" Grid.Column="0" Content="Weapon Bias" />
+                    <ComboBox x:Name="ComboGqBiasWeapon"      Grid.Row="5" Grid.Column="1"
+                        DisplayMemberPath="Display"
+                        SelectedValuePath="WeaponBias" />
+                    
+                    <Label x:Name="LabelGqBiasArmorSeries" Grid.Row="6" Grid.Column="0" Content="Armor Series Bias" />
+                    <ComboBox x:Name="ComboGqBiasArmorSeries"      Grid.Row="6" Grid.Column="1"
+                        DisplayMemberPath="Display"
+                        SelectedValuePath="ArmorSeriesBias" />
+                    
+                    <Label x:Name="LabelGqBiasArmorType" Grid.Row="7" Grid.Column="0" Content="Armor Type Bias" />
+                    <ComboBox x:Name="ComboGqBiasArmorType"      Grid.Row="7" Grid.Column="1"
+                        DisplayMemberPath="Display"
+                        SelectedValuePath="ArmorTypeBias" />
+
+                    <Label x:Name="LabelGqMonsterAId" Grid.Row="8" Grid.Column="0" Content="Monster 1 ID" />
+                    <ComboBox x:Name="ComboGqMonsterAId"      Grid.Row="8" Grid.Column="1"
+                        DisplayMemberPath="Display"
+                        SelectedValuePath="MonsterAId" />
+                    
+                    <Label x:Name="LabelGqMonsterBId" Grid.Row="9" Grid.Column="0" Content="Monster 2 ID" />
+                    <ComboBox x:Name="ComboGqMonsterBId"      Grid.Row="9" Grid.Column="1"
+                        DisplayMemberPath="Display"
+                        SelectedValuePath="MonsterBId" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+    
+        
+    
+</Window>

@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mh4edit", "mh4edit.csproj", "{A6812A95-D2A8-B583-CA9F-FA547C8565DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6812A95-D2A8-B583-CA9F-FA547C8565DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6812A95-D2A8-B583-CA9F-FA547C8565DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6812A95-D2A8-B583-CA9F-FA547C8565DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6812A95-D2A8-B583-CA9F-FA547C8565DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB983BCD-2435-4D2D-A9F3-F8C494BEF979}
+	EndGlobalSection
+EndGlobal
