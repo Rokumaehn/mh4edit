@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mh4edit"
         mc:Ignorable="d"
-        Title="MH4UEdit" Height="520" Width="740" MinWidth="740" MinHeight="600" Icon="/images/app.ico">
+        Title="{Binding WindowTitle, RelativeSource={RelativeSource Mode=Self}}"
+        Height="520" Width="740" MinWidth="740" MinHeight="600" Icon="/images/app.ico">
     
     <Window.Resources>
         

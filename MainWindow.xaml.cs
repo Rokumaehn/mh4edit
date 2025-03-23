@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,6 +19,8 @@ namespace mh4edit;
 /// </summary>
 public partial class MainWindow : Window
 {
+    public string WindowTitle => "MH4UEdit " + Assembly.GetExecutingAssembly().GetName().Version;
+    
     public MonHunSave save;
     public MonHunCharacter character;
     public MainWindow()
