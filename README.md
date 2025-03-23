@@ -1,6 +1,6 @@
 # mh4edit
 ![demo1](https://raw.githubusercontent.com/Rokumaehn/mh4edit/refs/heads/main/doc/EquipmentBox.png)
-![demo2](https://raw.githubusercontent.com/Rokumaehn/mh4edit/refs/heads/main/doc/LbgMagazineSelection.png)
+![demo2](https://raw.githubusercontent.com/Rokumaehn/mh4edit/refs/heads/main/doc/LbgMagazineSizes.png)
 ## Introduction
 A savegame editor for Monster Hunter 4 Ultimate for the 3ds.
 It handles the decryption and re-encryption of savegames, so no need to do that manually.
