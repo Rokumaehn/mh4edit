@@ -70,7 +70,7 @@ public class Palico : INotifyPropertyChanged
         Array.Copy(_raw, 0, ret, 0, _raw.Length);
 
         for (int i = 0; i < 24; i++) ret[i] = 0;
-        System.Text.Encoding.Unicode.GetBytes(_name, 0, 12, ret, 0);
+        System.Text.Encoding.Unicode.GetBytes(_name, 0, Math.Min(12, _name.Length), ret, 0);
         Array.Copy(BitConverter.GetBytes(_exp), 0, ret, 0x70, 8);
 
         return ret;

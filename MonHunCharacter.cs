@@ -173,7 +173,7 @@ namespace mh4edit
 
          byte[] bname = new byte[24];
          for (int i = 0; i < 24; i++) bname[i] = 0;
-         System.Text.Encoding.Unicode.GetBytes(name, 0, 12, bname, 0);
+         System.Text.Encoding.Unicode.GetBytes(name, 0, Math.Min(12, name.Length), bname, 0);
          writer.Write(bname);
          writer.Write(gender);
          writer.Write(face);
