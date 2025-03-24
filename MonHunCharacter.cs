@@ -39,6 +39,7 @@ namespace mh4edit
       public MonHunItem[] itemBox;
       public MonHunEquip[] equipBox;
       public GuildQuest[] guildQuests;
+      public Palico[] palicos;
 
       public MonHunItem[] ItemBox
       {
@@ -81,7 +82,20 @@ namespace mh4edit
             OnPropertyChanged(nameof(GuildQuests));
          }
       }
-      
+
+      public Palico[] Palicos
+      {
+         get
+         {
+            return palicos;
+         }
+
+         set
+         {
+            palicos = value;
+            OnPropertyChanged(nameof(GuildQuests));
+         }
+      }
 
       public uint Funds
       {
@@ -246,6 +260,31 @@ namespace mh4edit
          return ret;
       }
 
+      public byte[] SerializePalicoMain()
+      {
+         return palicos[0].Serialize();
+      }
+
+      public byte[] SerializePalicoStringers()
+      {
+         byte[] ret = new byte[232 * 5];
+         for(int i=0; i<5; i++)
+         {
+            Array.Copy(palicos[i+1].Serialize(), 0, ret, i*232, 232);
+         }
+         return ret;
+      }
+
+      public byte[] SerializePalicoReserves()
+      {
+         byte[] ret = new byte[232 * 50];
+         for(int i=0; i<50; i++)
+         {
+            Array.Copy(palicos[i+6].Serialize(), 0, ret, i*232, 232);
+         }
+         return ret;
+      }
+
       public static List<MonHunItem> allItems = new();
       public List<MonHunItem> AllItems => allItems;
       public List<MonHunEquip> AllEquipTypes => MonHunEquip.equipTypes;
@@ -261,6 +300,7 @@ namespace mh4edit
 
          reader.BaseStream.Seek(0x0, SeekOrigin.Begin);
          name = System.Text.Encoding.Unicode.GetString(reader.ReadBytes(24), 0, 24);
+         name = name.Split('\0')[0];
          gender = reader.ReadByte();
          face = reader.ReadByte();
          hairStyle = reader.ReadByte();
@@ -307,6 +347,20 @@ namespace mh4edit
          for (int i = 0; i < 10; i++)
          {
             guildQuests[i] = new GuildQuest(reader.ReadBytes(304));
+         }
+
+         // Palicos
+         palicos = new Palico[56];
+         reader.BaseStream.Seek(0xC4B0, SeekOrigin.Begin);
+         palicos[0] = new Palico(reader.ReadBytes(232));
+         reader.BaseStream.Seek(0xF338, SeekOrigin.Begin);
+         for (int i = 1; i < 6; i++)
+         {
+            palicos[i] = new Palico(reader.ReadBytes(232));
+         }
+         for (int i = 6; i < 56; i++)
+         {
+            palicos[i] = new Palico(reader.ReadBytes(232));
          }
       }
    }

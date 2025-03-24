@@ -466,6 +466,38 @@
                         SelectedValuePath="MonsterBId" />
                 </Grid>
             </TabItem>
+            <TabItem Header="Palicos">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="Quest" />
+                    <ComboBox x:Name="ComboPalPalico" Grid.Row="0" Grid.Column="1"
+                        SelectionChanged="ComboPalPalico_SelectionChanged" />
+                    
+                    <Label Grid.Row="1" Grid.Column="0" Content="Owner" />
+                    <TextBox x:Name="TextboxPalName" Grid.Row="1" Grid.Column="1" />
+
+                    <Label Grid.Row="2" Grid.Column="0" Content="Id" />
+                    <TextBox x:Name="TextboxPalExp" Grid.Row="2" Grid.Column="1" />
+
+                    
+                </Grid>
+            </TabItem>
         </TabControl>
 
     </Grid>

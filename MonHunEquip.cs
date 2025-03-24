@@ -291,6 +291,7 @@ namespace mh4edit
         public static List<MonHunEquip> equipChargeblade = new List<MonHunEquip>();
         
         public static BitmapImage[] images = new BitmapImage[21];
+        public static BitmapImage[][] imagesNew = new BitmapImage[21][];
         static MonHunEquip()
         {
             for(int i=0; i < MonHunEquipStatic.allEqpChest.Length; i++)
@@ -374,8 +375,6 @@ namespace mh4edit
                 equipChargeblade.Add(new MonHunEquip(20, (ushort)i));
             }
 
-            
-
             images[0] = null;
             images[1] = new(new Uri("images/Equip_Chest.png", UriKind.Relative));
             images[2] = new(new Uri("images/Equip_Arms.png", UriKind.Relative));
@@ -397,6 +396,38 @@ namespace mh4edit
             images[18] = new(new Uri("images/Equip_HuntingHorn.png", UriKind.Relative));
             images[19] = new(new Uri("images/Equip_InsectGlaive.png", UriKind.Relative));
             images[20] = new(new Uri("images/Equip_ChargeBlade.png", UriKind.Relative));
+
+            imagesNew[0] = new BitmapImage[10]
+            {
+                null, null, null, null, null, null, null, null, null, null
+            };
+            for(int i=1; i < 21; i++)
+            {
+                imagesNew[i] = new BitmapImage[10];
+            }
+            for(int i=0; i < 10; i++)
+            {
+                imagesNew[1][i] = new(new Uri("images/armors/body/body" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[2][i] = new(new Uri("images/armors/arms/arms" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[3][i] = new(new Uri("images/armors/waist/waist" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[4][i] = new(new Uri("images/armors/legs/legs" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[5][i] = new(new Uri("images/armors/head/head" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[6][i] = new(new Uri("images/armors/talisman/talisman" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[7][i] = new(new Uri("images/weapons/great_sword/great_sword" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[8][i] = new(new Uri("images/weapons/sword_and_shield/sword_and_shield" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[9][i] = new(new Uri("images/weapons/hammer/hammer" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[10][i] = new(new Uri("images/weapons/lance/lance" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[11][i] = new(new Uri("images/weapons/light_bowgun/light_bowgun" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[12][i] = new(new Uri("images/weapons/heavy_bowgun/heavy_bowgun" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[13][i] = new(new Uri("images/weapons/long_sword/long_sword" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[14][i] = new(new Uri("images/weapons/switch_axe/switch_axe" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[15][i] = new(new Uri("images/weapons/gunlance/gunlance" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[16][i] = new(new Uri("images/weapons/bow/bow" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[17][i] = new(new Uri("images/weapons/dual_blades/dual_blades" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[18][i] = new(new Uri("images/weapons/hunting_horn/hunting_horn" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[19][i] = new(new Uri("images/weapons/insect_glaive/insect_glaive" + (i+1) + ".png", UriKind.Relative));
+                imagesNew[20][i] = new(new Uri("images/weapons/charge_blade/charge_blade" + (i+1) + ".png", UriKind.Relative));
+            }
 
             equipTypes.Add(new MonHunEquip(0));
             equipTypes.Add(new MonHunEquip(1));
@@ -423,11 +454,36 @@ namespace mh4edit
 
         public virtual ImageSource GetImage()
         {
-            // if (ID == 0)
-            // {
-            //     return null;
-            // }
-            return images[_type];
+            //return images[_type];
+            switch(this)
+            {
+                case MonHunArmor armor:
+                    return imagesNew[_type][armor.Rarity];
+                case MonHunWeapon weapon:
+                    return imagesNew[_type][weapon.Rarity];
+                case MonHunTalisman talisman:
+                    return _id switch
+                    {
+                        0 => imagesNew[_type][0],
+                        1 => imagesNew[_type][0],
+                        2 => imagesNew[_type][1],
+                        3 => imagesNew[_type][2],
+                        4 => imagesNew[_type][3],
+                        5 => imagesNew[_type][4],
+                        6 => imagesNew[_type][5],
+                        7 => imagesNew[_type][6],
+                        8 => imagesNew[_type][7],
+                        9 => imagesNew[_type][8],
+                        10 => imagesNew[_type][7],
+                        11 => imagesNew[_type][8],
+                        12 => imagesNew[_type][9],
+                        13 => imagesNew[_type][9],
+                        14 => imagesNew[_type][9],
+                        _ => imagesNew[_type][0]
+                    };
+                default:
+                    return images[_type];
+            }
         }
 
         public MonHunEquip(byte type)

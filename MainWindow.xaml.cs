@@ -44,6 +44,7 @@ public partial class MainWindow : Window
             ReloadEquipBoxPage();
 
             ComboGqQuest.ItemsSource = character.GuildQuests;
+            ComboPalPalico.ItemsSource = character.Palicos;
         }
     }
 
@@ -172,6 +173,22 @@ public partial class MainWindow : Window
             myBinding = new Binding("MonsterBId");
             myBinding.Source = gq;
             ComboGqMonsterBId.SetBinding(ComboBox.SelectedValueProperty, myBinding);
+        }
+    }
+
+    private void ComboPalPalico_SelectionChanged(object sender, RoutedEventArgs e)
+    {
+        var combo = sender as ComboBox;
+        var pal = combo.SelectedItem as Palico;
+        if(pal != null)
+        {
+            Binding myBinding = new Binding("Name");
+            myBinding.Source = pal;
+            TextboxPalName.SetBinding(TextBox.TextProperty, myBinding);
+
+            myBinding = new Binding("Exp");
+            myBinding.Source = pal;
+            TextboxPalExp.SetBinding(TextBox.TextProperty, myBinding);
         }
     }
 

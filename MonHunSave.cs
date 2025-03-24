@@ -81,6 +81,11 @@ namespace mh4edit
          ms.Write(slot.SerializeEquipmentBox());
          ms.Seek(0xDCA8, SeekOrigin.Begin);
          ms.Write(slot.SerializeActiveGq());
+         ms.Seek(0xC4B0, SeekOrigin.Begin);
+         ms.Write(slot.SerializePalicoMain());
+         ms.Seek(0xF338, SeekOrigin.Begin);
+         ms.Write(slot.SerializePalicoStringers());
+         ms.Write(slot.SerializePalicoReserves());
 
          // from here on work on a duplicate of the decrypted buffer
          var outBuf = new byte[81408];
